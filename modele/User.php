@@ -12,7 +12,7 @@ class UserModel {
 
             // Insertion de l'utilisateur dans la base de données
             $query = $conn->prepare("INSERT INTO Utilisateur (nomU, email, mpd) VALUES (?, ?, ?)");
-            $query->execute([$username, $email, $hashedPassword,]);
+            $query->execute([$username, $email, $hashedPassword]);
 
             return true; // L'inscription a réussi
         } catch (PDOException $e) {

@@ -10,9 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajouterRoman'])) {
     $controller->ajouterRoman($auteur, $titre, $description, $photo);
 }
 
-// Si le formulaire de modification de roman est soumis
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifierRoman'])) {
-    $id = $_POST['id'];
+    $idR = $_POST['id'];
     $auteur = $_POST['auteur'];
     $titre = $_POST['titre'];
     $description = $_POST['description'];
@@ -21,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifierRoman'])) {
 }
 
 
-// Si le formulaire de suppression de roman est soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimerRoman'])) {
     $id = $_POST['id'];
     $controller->supprimerRoman($id);
@@ -94,24 +93,47 @@ $romans = $controller->getRomans();
         </section>
 
         <section>
-            <h2>Mes Romans</h2>
+    <h2>Mes Romans</h2>
 
-            <article>
-                <h3>"我的超能力每周刷新"</h3>
-                <img src="photos/livre5.jpg" alt="Image du roman 我的超能力每周刷新">
-                <p>C'est le dernier roman que j'ai lu. Il raconte l'histoire passionnante de Chen Yuan, qui découvre qu'il rafraîchit ses pouvoirs chaque semaine...</p>
-                <p>La première semaine, il voit des nombres rouges apparaître sur tous les êtres vivants, allant de quelques centaines à plusieurs milliers, voire des dizaines de milliers...</p>
-                <a href="https://www.qidian.com/chapter/1037632698/761297051/">Continuer à lire</a>
-            </article>
+    <article>
+        <h3>"我的超能力每周刷新"</h3>
+        <img src="photos/livre5.jpg" alt="Couverture du roman 我的超能力每周刷新">
+        <p>C'est le dernier roman que j'ai lu. Il raconte l'histoire passionnante de Chen Yuan, qui découvre qu'il rafraîchit ses pouvoirs chaque semaine...</p>
+        <p>La première semaine, il voit des nombres rouges apparaître sur tous les êtres vivants, allant de quelques centaines à plusieurs milliers, voire des dizaines de milliers...</p>
+        <button class="show-link" data-target="link1">Afficher le lien pour continuer à lire</button>
+        <a id="link1" class="more-link" href="https://www.qidian.com/chapter/1037632698/761297051/" style="display: none;">Continuer à lire</a>
+    </article>
 
-            <article>
-                <h3>"我在人间立地成仙"</h3>
-                <img src="photos/livre6.jpg" alt="Image du roman 我在人间立地成仙">
-                <p>Fang Wang explore le monde à la recherche d'une méthode pour devenir immortel. Après des milliers de voyages à travers montagnes et rivières, il cherche le saint-graal de l'immortalité...</p>
-                <p>À travers des aventures palpitantes, Fang Wang découvre des secrets anciens et rencontre des êtres exceptionnels dans sa quête de l'immortalité...</p>
-                <a href="https://www.qidian.com/chapter/1038162140/768860258/">Relire </a>
-            </article>
-        </section>
+    <article>
+        <h3>"我在人间立地成仙"</h3>
+        <img src="photos/livre6.jpg" alt="Couverture du roman 我在人间立地成仙">
+        <p>Fang Wang explore le monde à la recherche d'une méthode pour devenir immortel. Après des milliers de voyages à travers montagnes et rivières, il cherche le saint-graal de l'immortalité...</p>
+        <p>À travers des aventures palpitantes, Fang Wang découvre des secrets anciens et rencontre des êtres exceptionnels dans sa quête de l'immortalité...</p>
+        <button class="show-link" data-target="link2">Afficher le lien pour relire</button>
+        <a id="link2" class="more-link" href="https://www.qidian.com/chapter/1038162140/768860258/" style="display: none;">Relire</a>
+    </article>
+</section>
+
+<script>
+    // Sélection de tous les éléments avec la classe "show-link"
+const showLinks = document.querySelectorAll('.show-link');
+
+// Pour chaque élément avec la classe "show-link", on ajoute un écouteur d'événement pour le clic
+showLinks.forEach(button => {
+    button.addEventListener('click', function() {
+        // On récupère l'ID de l'élément cible à afficher à partir de l'attribut data-target du bouton
+        const targetId = button.getAttribute('data-target');
+        // On sélectionne l'élément cible à partir de son ID
+        const targetLink = document.getElementById(targetId);
+        // On change le style de l'élément cible pour le rendre visible (display: block)
+        targetLink.style.display = 'block';
+        // On masque le bouton sur lequel l'utilisateur a cliqué
+        button.style.display = 'none';
+    });
+});
+
+</script>
+
     </main>
 
     <footer>

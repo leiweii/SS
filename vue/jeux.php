@@ -1,33 +1,27 @@
-<!-- jeux.php -->
 <?php
 require_once 'controleur/Controller.php';
 $controller = new Controller();
-$favoris = $controller->getFavoris();
-$romans = $controller->getRomans();
-$jeux = $controller->getJeux();
 
-// Si le formulaire d'ajout de jeu est soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['ajouterJeu'])) {
-    $nom = $_POST['nom'];
-    $description = $_POST['description'];
-    $logo = $_POST['logo'];
-    $controller->ajouterJeu($nom, $description, $logo);
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["ajouterJeu"])) {
+        $nomJ = $_POST["nomJ"];
+        $descriptionJ = $_POST["descriptionJ"];
+        $logo = $_POST["logo"];
+        $controller->ajouterJeu($nomJ, $descriptionJ, $logo);
+    }
 
-// Si le formulaire de modification de jeu est soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modifierJeu'])) {
-    // Récupérer les autres champs du formulaire pour la modification du jeu
-    $id = $_POST['id'];
-    $nom = $_POST['nom'];
-    $description = $_POST['description'];
-    $logo = $_POST['logo'];
-    $controller->modifierJeu($id, $nom, $description, $logo);
-}
+    if (isset($_POST["modifierJeu"])) {
+        $idJ = $_POST["idJ"];
+        $nomJ = $_POST["nomJ"];
+        $descriptionJ = $_POST["descriptionJ"];
+        $logo = $_POST["logo"];
+        $controller->modifierJeu($idJ, $nomJ, $descriptionJ, $logo);
+    }
 
-// Si le formulaire de suppression de jeu est soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimerJeu'])) {
-    $id = $_POST['id'];
-    $controller->supprimerJeu($id);
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['supprimerJeu'])) {
+        $id = $_POST['id'];
+        $controller->supprimerJeu($id);
+    }
 }
 
 $jeux = $controller->getJeux();
@@ -54,8 +48,7 @@ $jeux = $controller->getJeux();
     </header>
 
     <main>
-
-    <section>
+        <section>
             <h2>Liste des jeux</h2>
             <table>
                 <thead>
@@ -73,8 +66,8 @@ $jeux = $controller->getJeux();
                             <td><?php echo $jeu['DescriptionJ']; ?></td>
                             <td><img src="<?php echo $jeu['Logo']; ?>" alt="Logo"></td>
                             <td>
-                                <form action="jeux.php" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $jeu['id']; ?>">
+                                <form action="index.php?action=Jeux" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $jeu['idJ']; ?>">
                                     <button type="submit" name="modifierJeu">Modifier</button>
                                     <button type="submit" name="supprimerJeu">Supprimer</button>
                                 </form>
@@ -83,6 +76,15 @@ $jeux = $controller->getJeux();
                     <?php endforeach; ?>
                 </tbody>
             </table>
+        </section>
+        <section>
+            <h2>Ajouter un jeu</h2>
+            <form action="index.php?action=Jeux" method="post">
+                <input type="text" name="nomJ" placeholder="Nom du jeu" required>
+                <input type="text" name="descriptionJ" placeholder="Description du jeu" required>
+                <input type="text" name="logo" placeholder="URL du logo" required>
+                <button type="submit" name="ajouterJeu">Ajouter</button>
+            </form>
         </section>
 
         <section>
@@ -94,8 +96,8 @@ $jeux = $controller->getJeux();
                 <h3>Minecraft</h3>
                 <img src="photos/M.jpg" alt="Image du jeu">
                 <p>Minecraft est un jeu vidéo de type aventure « bac à sable » (construction complètement libre) développé par le Suédois Markus Persson, alias Notch, puis par la société Mojang Studios. Il s'agit d'un univers composé de voxels et généré de façon procédurale, qui intègre un système d'artisanat axé sur l'exploitation puis la transformation de ressources naturelles (minéralogiques, fossiles, animales et végétales).</p>
-                <h3>Téléchargement </h3>
-                <a href="https://www.minecraft.net/fr-fr">Voir le site</a>
+                <button class="show-link" data-target="minecraft-link">Voir le site</button>
+                <a id="minecraft-link" class="more-link" href="https://www.minecraft.net/fr-fr" style="display: none;">Téléchargement Minecraft</a>
             </article>            
 
 
@@ -103,8 +105,8 @@ $jeux = $controller->getJeux();
                 <h3>Battle of Balls (球球大作战) </h3>
                 <img src="photos/oo.jpg" alt="Image du jeu">
                 <p>Ball Battle est un jeu mobile en ligne développé indépendamment par le studio Superpop&amp;Lollipop de Giant Network et gratuit (hors accessoires). Il a été lancé le 27 mai 2015 par Giant Network en Chine continentale. Le jeu est conçu dans le but de PK interactif en temps réel entre les joueurs, et grâce à des règles simples, l'opération du joueur est directement transformée en stratégie de jeu, expérimentant le plaisir de la bataille de la collision intellectuelle.</p>
-                <h3>Téléchargement </h3>
-                <a href="https://www.battleofballs.com/index_PC.html">Voir le site</a>
+                <button class="show-link" data-target="battle-of-balls-link">Voir le site</button>
+                <a id="battle-of-balls-link" class="more-link" href="https://www.battleofballs.com/index_PC.html" style="display: none;">Téléchargement Battle of Balls</a>
             </article>
 
 
@@ -112,8 +114,8 @@ $jeux = $controller->getJeux();
                 <h3>PUBG: Battlegrounds (绝地求生)</h3>
                 <img src="photos/J.jpg" alt="Image du jeu">
                 <p>PUBG: Battlegrounds est un jeu de tir à la première personne et à la troisième personne de type joueur contre joueur dans lequel une centaine de joueurs se battent dans un battle royale. Les joueurs peuvent choisir de participer à la partie en solo, en duo ou avec quatre personnes. La dernière personne ou équipe en vie remporte la partie.</p>
-                <h3>Téléchargement </h3>
-                <a href="https://pubg.qq.com/">Voir le site</a>
+                <button class="show-link" data-target="pubg-link">Voir le site</button>
+                <a id="pubg-link" class="more-link" href="https://pubg.qq.com/" style="display: none;">Téléchargement PUBG: Battlegrounds</a>
             </article>
 
 
@@ -121,8 +123,8 @@ $jeux = $controller->getJeux();
                 <h3>Game of Heroes: Three Kingdoms (三国杀Online)</h3>
                 <img src="photos/S.jpg" alt="Image du roman">
                 <p>Three Kingdoms est un jeu de cartes stratégique original sur le thème des Trois Royaumes qui combine des éléments d'histoire, d'art et de cartes.</p>
-                <h3>Téléchargement </h3>
-                <a href="https://www.sanguosha.com/">Voir le site</a>
+                <button class="show-link" data-target="three-kingdoms-link">Voir le site</button>
+                <a id="three-kingdoms-link" class="more-link" href="https://www.sanguosha.com/" style="display: none;">Téléchargement Game of Heroes: Three Kingdoms</a>
             </article>
 
 
@@ -130,12 +132,31 @@ $jeux = $controller->getJeux();
                 <h3>时空猎人</h3>
                 <img src="photos/SK.jpg" alt="Image du roman">
                 <p>Un style de combat horizontal classique, 200 millions de joueurs adorent ce jeu de combat mobile !</p>
-                <h3>Téléchargement </h3>
-                <a href="https://hunter.yh.cn/hunter/index">Voir le site</a>
-            </article>
+                <button class="show-link" data-target="time-hunter-link">Voir le site</button>
+                <a id="time-hunter-link" class="more-link" href="https://hunter.yh.cn/hunter/index" style="display: none;">Téléchargement 时空猎人</a>
+                </article>
 
 
         </section>
+
+        <script>
+    // Sélectionne tous les boutons avec la classe "show-link"
+    const showLinks = document.querySelectorAll('.show-link');
+
+    // Pour chaque bouton, ajoute un écouteur d'événement pour le clic
+    showLinks.forEach(button => {
+        button.addEventListener('click', function() {
+            // Récupère l'ID de l'élément cible à partir de l'attribut data-target du bouton
+            const targetId = button.getAttribute('data-target');
+            // Sélectionne l'élément cible à partir de son ID
+            const targetLink = document.getElementById(targetId);
+            // Change le style de l'élément cible pour le rendre visible (display: block)
+            targetLink.style.display = 'block';
+            // Masque le bouton sur lequel l'utilisateur a cliqué
+            button.style.display = 'none';
+        });
+    });
+</script>
     </main>
 
     <footer>

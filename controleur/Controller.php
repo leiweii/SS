@@ -42,33 +42,36 @@ class Controller {
         return $this->jeux->getJeux();
     }
 
+
     public function ajouterRoman($auteur, $titre, $description, $photo) {
-        // Appel de la méthode d'ajout de roman de la classe Romans
-        return $this->romans->ajouterRoman($auteur, $titre, $description, $photo);
+    return $this->romans->ajouterRoman($auteur, $titre, $description, $photo);
+    }
+
+    
+    public function modifierRoman($idR, $auteur, $titre, $description, $photo) {
+        return $this->romans->modifierRoman($idR, $auteur, $titre, $description, $photo);
     }
     
-    public function modifierRoman($id, $auteur, $titre, $description, $photo) {
-        // Appel de la méthode de modification de roman de la classe Romans
-        return $this->romans->modifierRoman($id, $auteur, $titre, $description, $photo);
-    }
     
     public function supprimerRoman($id) {
         return $this->romans->supprimerRoman($id);
     }
     
 
-    // Méthodes CRUD pour les jeux
-    public function ajouterJeu($nom, $description, $logo) {
-        return $this->jeux->ajouterJeu($nom, $description, $logo);
+    public function ajouterJeu($nomJ, $descriptionJ, $logo) {
+        return $this->jeux->ajouterJeu($nomJ, $descriptionJ, $logo);
     }
-
-    public function modifierJeu($id, $nom, $description, $logo) {
-        return $this->jeux->modifierJeu($id, $nom, $description, $logo);
+    
+    public function modifierJeu($idJ, $nomJ, $descriptionJ, $logo) {
+        return $this->jeux->modifierJeu($idJ, $nomJ, $descriptionJ, $logo);
     }
-
+    
     public function supprimerJeu($id) {
         return $this->jeux->supprimerJeu($id);
     }
+    
+
+    
 
     // Méthode pour diriger vers la vue appropriée en fonction de l'action
     public function controleurPrincipal($action) {

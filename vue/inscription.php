@@ -22,7 +22,7 @@
         // Afficher le message d'inscription
         echo "<p>$registerMessage</p>";
         ?>
-        <a href="index.php?action=accueil">Retour à la page par d'accueil pour se connecter</a>
+        <a href="index.php?action=accueil">Retour à la page d'accueil pour se connecter</a>
     </div>
 </body>
 </html>

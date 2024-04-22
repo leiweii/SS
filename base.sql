@@ -20,7 +20,7 @@ CREATE TABLE Utilisateur(
    nomU VARCHAR(200),
    email VARCHAR(200),
    mpd VARCHAR(200),
-   idF INT,
+   idF INT NULL,
    FOREIGN KEY(idF) REFERENCES Favoris(idF)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -35,7 +35,7 @@ CREATE TABLE Roman(
    Titre VARCHAR(50),
    DescriptionR VARCHAR(250) ,
    Photo VARCHAR(100) ,
-   idF INT ,
+   idF INT NULL,
    FOREIGN KEY(idF) REFERENCES Favoris(idF)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -50,12 +50,12 @@ CREATE TABLE Jeux(
    nomJ VARCHAR(50) ,
    DescriptionJ VARCHAR(250) ,
    Logo VARCHAR(100) ,
-   idF INT ,
+   idF INT NULL,
    FOREIGN KEY(idF) REFERENCES Favoris(idF)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 INSERT INTO Jeux (idJ, nomJ, DescriptionJ, Logo, idF) VALUES
 (1, 'Honneur des rois', '-Honor of Kings est une arène de combat multijoueur en ligne', 'photos/logo.jpg', 1),
-(2, 'ss', 'Desssssss', 'logo2.jpg', 2),
-(3, 'bbbb', 'Desffff', 'logo3.jpg', 3);
+(2, 'Happy Fun', 'Happy Fun est un jeu casual à trois consommations développé par Le Element.', 'photos/K.jpeg', 2),
+(3, 'Genshin Impact', 'Genshin Impact est un jeu vidéo de rôle d’action développé et publié par miHoYo. Il est sorti sur Android, iOS, PlayStation 4 et Windows en 2020, sur PlayStation 5 en 2021. ', 'photos/PP.jpeg', 3);

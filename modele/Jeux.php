@@ -13,20 +13,21 @@ class Jeux {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Méthodes CRUD
-    public function ajouterJeu($nom, $description, $logo) {
+
+    public function ajouterJeu($nomJ, $descriptionJ, $logo) {
         $stmt = $this->db->prepare("INSERT INTO Jeux (nomJ, DescriptionJ, Logo) VALUES (?, ?, ?)");
-        return $stmt->execute([$nom, $description, $logo]);
+        return $stmt->execute([$nomJ, $descriptionJ, $logo]);
+    }
+    
+    public function modifierJeu($idJ, $nomJ, $descriptionJ, $logo) {
+        $stmt = $this->db->prepare("UPDATE Jeux SET nomJ = ?, DescriptionJ = ?, Logo = ? WHERE idJ = ?");
+        return $stmt->execute([$nomJ, $descriptionJ, $logo, $idJ]);
+    }
+    
+    public function supprimerJeu($idJ) {
+        $stmt = $this->db->prepare("DELETE FROM Jeux WHERE idJ = ?");
+        return $stmt->execute([$idJ]);
     }
 
-    public function modifierJeu($id, $nom, $description, $logo) {
-        $stmt = $this->db->prepare("UPDATE Jeux SET nomJ = ?, DescriptionJ = ?, Logo = ? WHERE id = ?");
-        return $stmt->execute([$nom, $description, $logo, $id]);
-    }
-
-    public function supprimerJeu($id) {
-        $stmt = $this->db->prepare("DELETE FROM Jeux WHERE id = ?");
-        return $stmt->execute([$id]);
-    }
 }
 ?>
