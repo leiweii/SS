@@ -4,7 +4,7 @@ include "$racine/controleur/Controller.php";
 include "$racine/controleur/UserController.php"; 
 include "$racine/modele/bd.inc.php";
 
-// Connexion à la base de données
+// Connexion à la base de donnéesrfr
 $db = connexionPDO();
 $controller = new Controller();
 
